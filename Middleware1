@@ -1,0 +1,14 @@
+{"header":{"host":"localhost:81","upgrade-insecure-requests":"1","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.2 Safari/605.1.15","accept-language":"en-us","accept-encoding":"gzip, deflate","connection":"keep-alive"},"path":"/todo/App/api/todos","method":"GET","hostname":"localhost"}RESPONSE:[
+  {
+    "id": 0,
+    "title": "buy the milk"
+  },
+  {
+    "id": 2,
+    "title": "feed the cat"
+  },
+  {
+    "id": 4,
+    "title": "Make bed"
+  }
+]
