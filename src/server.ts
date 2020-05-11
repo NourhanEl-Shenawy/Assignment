@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 const fs = require('fs');
-
+const CircularJSON = require('circular-json');
 // Initialize todo list here
 var todos = [
   {
@@ -30,7 +30,7 @@ function middleware(request: express.Request, response: express.Response, next) 
       hostname: request.hostname
     };
     //Storing request in the file:
-    fs.writeFile('Middleware1',JSON.stringify(stored_request),function (err) {
+    fs.writeFile('Middleware1',CircularJSON.stringify(request),function (err) {
   if (err) return console.log(err);
   console.log('DONE');
 });
@@ -38,42 +38,48 @@ function middleware(request: express.Request, response: express.Response, next) 
 
 //Storing response in the file:
 let stored_response = 'RESPONSE:' + JSON.stringify(todos, null, 2);
-    fs.appendFile('Middleware1', stored_response, function (err) {
+//console.log(response);
+  fs.appendFile('Middleware1', CircularJSON.stringify(response), function (err) {
   if (err) throw err;
   console.log('Saved!');
 });
+fs.appendFile('Middleware1', stored_response, function (err) {
+if (err) throw err;
+console.log('Saved Todo List!');
+});
     next();
+    // Second Middleware:
+    const gateway_apikey= request.header('-x-Gateway-ApiKey'); //it should be fixed guid
+    const token = request.header('-csrf-token'); //it should be eg.1
+    if (token === "1"  && gateway_apikey === "fixed-guid"){
+      console.log("Second MiddleWare Passed");
+    }
+    else {
+      console.log("Second MiddleWare Failed");
+      //response.send("ERROR");
+    }
   }
 else {
   console.log("No Middleware should be applied here");
-}
-// Second Middleware:
-const gateway_apikey= request.header('-x-Gateway-ApiKey'); //it should be fixed guid
-const token = request.header('-csrf-token'); //it should be eg.1
-if (token === "1"  && gateway_apikey === "fixed-guid"){
-  console.log("Second MiddleWare Passed");
-}
-else {
-  console.log("Second MiddleWare Failed");
 }
 }
 const app = express();
 app.use(middleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
+
 //Handle GET Request: todo/App/api/todos
 app.get('/todo/App/api/todos/', (request, response) => {
 //Retrieving the list of items:
 response.json(todos);
 });
 
-//Handle POST Request: todo/App/api/todo
+//Handle POST Request: todo/App/api/todo. To add a new item to the list
 app.post('/todo/App/api/todo/', (request, response) => {
   console.log(`POST: ${request.body}`);
   //Add the new item to the list
-  todos.push(request.body);
-// todos.remove(request.params.id);
-  console.log(todos);
+todos.push(request.body);
+  //console.log(todos);
   response.send('POST todo');
 });
 
