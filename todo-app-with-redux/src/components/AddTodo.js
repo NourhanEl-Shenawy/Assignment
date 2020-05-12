@@ -13,8 +13,10 @@ class AddTodo extends React.Component {
   };
 
   handleAddTodo = () => {
+    console.log(this.state);
     this.props.addTodo(this.state.input);
-    this.setState({ input: "" });
+    window.location.reload(true);
+  //  this.setState({ input: "" });
   };
 
   render() {

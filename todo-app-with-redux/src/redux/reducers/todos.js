@@ -2,6 +2,8 @@ import { ADD_TODO, TOGGLE_TODO, GET_DATA } from "../actionTypes";
 import axios from 'axios';
 import querystring from 'querystring';
 import { addTodo, toggleTodo, getTodo, setFilter, getData} from "../actions";
+
+// export let todo_length;
 // const initialState = {
 //   allIds: [1,2,3],
 //   byIds: {1:{
@@ -73,20 +75,30 @@ const initialState = {
 export default function(state = initialState, action) {
   console.log("state function ");
   console.log(state);
+  console.log(action.type);
+  // if(action.type === 'GET_DATA'){
+  // //In order to get the length of items.
+  // console.log("DATA LENGTH");
+  // todo_length = action.todo.allIds.length;
+  // console.log(todo_length);
+    //console.log(action.todo.allIds.length);
+     // console.log(`Current todo_length is: ${action.todo.allIds.length}`);
+  // }
   switch (action.type) {
     case ADD_TODO: {
-      const { id, content } = action.payload;
-      return {
-        ...state,
-        allIds: [...state.allIds, id],
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            content,
-            completed: false
-          }
-        }
-      };
+      return action.todo
+      // const { id, content } = action.payload;
+      // return {
+      //   ...state,
+      //   allIds: [...state.allIds, id],
+      //   byIds: {
+      //     ...state.byIds,
+      //     [id]: {
+      //       content,
+      //       completed: false
+      //     }
+      //   }
+      // };
     }
     case GET_DATA: {
       return action.todo;
@@ -111,11 +123,3 @@ export default function(state = initialState, action) {
 }
 
 //export default todos;
-
-// export const gettodo = () => dispatch => {
-//   console.log("GET TODO List From Server");
-//   axios.get('/http://localhost:81/todo/api/todos')
-//     .then((response) => response.data)
-//     .then((tasks) => dispatch(getTasks(tasks)))
-//     .catch((err) => console.error.bind(err));
-// };

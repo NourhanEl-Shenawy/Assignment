@@ -21,15 +21,15 @@ var todos = [
 const todos_node = {
   allIds: [1,2,3],
   byIds: {1:{
-    content: "Make bed",
+    content: "Prepare Breakfast",
     completed: false
   },
 2: {
-  content: "Lunch",
+  content: "Do Shopping",
   completed: false
 },
 3: {
-  content: "workkk",
+  content: "Read a book",
   completed: false
 }}
 };
@@ -115,9 +115,28 @@ response.json(todos_node);
 app.post('/todo/App/api/todo/', (request, response) => {
   console.log(`POST: ${request.body}`);
   //Add the new item to the list
-todos.push(request.body);
-  //console.log(todos);
-  response.send('POST todo');
+  //var json = JSON.parse(todos_node);
+
+  console.log(`POST: Request Body ID: $request.body.id`);
+  console.log(`POST: Request Body Content: $request.body.content`);
+  console.log(todos_node.allIds.push(request.body.id));
+    console.log("allIds are: after update");
+  console.log(todos_node.allIds);
+  todos_node.byIds = {
+    ...todos_node.byIds,
+    [request.body.id]: {
+      content: request.body.content,
+      completed: false
+    }
+  }
+  console.log("ByIds are: after update");
+    console.log(todos_node.byIds);
+//todos_node.push(request.body);
+//  console.log(todos_node);
+response.set('Access-Control-Allow-Origin', '*');
+response.header("Access-Control-Allow-Origin", "*");
+response.json(todos_node);
+  //response.send('POST todo');
 });
 
 //Handle PATCH Request: todo/App/api/todo. PATCH is used to do partial change.
