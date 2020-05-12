@@ -16,6 +16,23 @@ var todos = [
   }
 ];
 
+
+  var tasks: ["Workout","Study"];
+const todos_node = {
+  allIds: [1,2,3],
+  byIds: {1:{
+    content: "Make bed",
+    completed: false
+  },
+2: {
+  content: "Lunch",
+  completed: false
+},
+3: {
+  content: "workkk",
+  completed: false
+}}
+};
 //In order to apply MiddleWare:
 //Middlewares function
 function middleware(request: express.Request, response: express.Response, next) {
@@ -71,7 +88,27 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //Handle GET Request: todo/App/api/todos
 app.get('/todo/App/api/todos/', (request, response) => {
 //Retrieving the list of items:
-response.json(todos);
+//response.json(todos);
+//response.json(todos_node);
+console.log(todos_node);
+console.log("GETTTT");
+response.header("Access-Control-Allow-Origin", "*");
+//response.send(tasks);
+response.json(todos_node);
+//response.json(todos_node);
+//var body = todos_node;
+//response.send(todos_node);
+//response.setHeader('Access-Control-Allow-Origin', '*');
+ //response.end(JSON.stringify(todos_node));
+ console.log(response);
+// response.writeHead(200, {
+//   'Access-Control-Allow-Origin' : '*',
+//   'Content-Type': 'application/json' });
+// response.writeHead(200, {
+//     'Access-Control-Allow-Origin' : '*',
+//     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+// });
+
 });
 
 //Handle POST Request: todo/App/api/todo. To add a new item to the list
