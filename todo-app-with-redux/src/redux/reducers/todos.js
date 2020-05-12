@@ -104,18 +104,19 @@ export default function(state = initialState, action) {
       return action.todo;
     }
     case TOGGLE_TODO: {
-      const { id } = action.payload;
-      console.log("TOGGLE_TODO");
-      return {
-        ...state,
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            ...state.byIds[id],
-            completed: !state.byIds[id].completed
-          }
-        }
-      };
+      return action.todo;
+      // const { id } = action.payload;
+      // console.log("TOGGLE_TODO");
+      // return {
+      //   ...state,
+      //   byIds: {
+      //     ...state.byIds,
+      //     [id]: {
+      //       ...state.byIds[id],
+      //       completed: !state.byIds[id].completed
+      //     }
+      //   }
+      // };
     }
     default:
       return state;

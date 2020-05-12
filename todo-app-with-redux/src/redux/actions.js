@@ -22,10 +22,13 @@ let nextTodoId = Math.floor(Math.random() * 100) + 1;
 //   }
 // });
 
-export const toggleTodo = id => ({
-  type: TOGGLE_TODO,
-  payload: { id }
-});
+// export const toggleTodo = id => ({
+//   type: TOGGLE_TODO,
+//   payload: { id }
+// });
+
+
+
 
 // export const getTodo = byIds => ({
 //   type: ADD_TODO,
@@ -47,6 +50,7 @@ export const getData = () => {
   }
 }
 
+//To add a new item to the list
 export const addTodo = (content) => {
   console.log("ADD NEW ITEM TO THE LIST");
   let added_item = {id: nextTodoId, content: content};
@@ -58,4 +62,16 @@ export const addTodo = (content) => {
         type: "ADD_TODO", todo: json})).catch(err => dispatch({
           type: "ERROR", msg: "FAILED"}))
   }
+}
+//To remove the item from incompleted and mark it completed or Vice versa.
+export const toggleTodo = (id) => {
+  console.log("CHANGE ITEM FROM INCOMPELTE TO COMPLETED");
+  console.log(`The ID that will be removed is ${id}`);
+  return(dispatch) => {
+    return axios.patch('http://localhost:81/todo/App/api/todo/',{id}).then(response => response.json()).then(json => dispatch(
+      {
+        type: "TOGGLE_TODO", todo: json})).catch(err => dispatch({
+          type: "ERROR", msg: "FAILED"}))
+  }
+  
 }

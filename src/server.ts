@@ -100,7 +100,7 @@ response.json(todos_node);
 //response.send(todos_node);
 //response.setHeader('Access-Control-Allow-Origin', '*');
  //response.end(JSON.stringify(todos_node));
- console.log(response);
+ //console.log(response);
 // response.writeHead(200, {
 //   'Access-Control-Allow-Origin' : '*',
 //   'Content-Type': 'application/json' });
@@ -143,25 +143,38 @@ response.json(todos_node);
 app.patch('/todo/App/api/todo', (request, response) => {
   console.log(`PATCH: ${request.body}`);
   //get the ID of the item and update it with the request.body
-  todos[request.body.id] = request.body;
-  console.log(todos);
-  response.send('PATCH todo');
+  // todos[request.body.id] = request.body;
+  // console.log(todos);
+  console.log(`PATCH request ID is ${request.body.id}`);
+  var complete_flag = todos_node.byIds[request.body.id].completed;
+  console.log(complete_flag);
+  if(complete_flag){
+    todos_node.byIds[request.body.id].completed = "false";
+  }
+  else {
+    todos_node.byIds[request.body.id].completed = "true";
+  }
+  console.log(todos_node);
+  response.set('Access-Control-Allow-Origin', '*');
+  response.header("Access-Control-Allow-Origin", "*");
+  response.json(todos_node);
+//  response.send('PATCH todo');
 });
 
 //Handle DELETE Request: todo/App/api/todo
-app.delete('/todo/App/api/todo', (request, response) => {
-   console.log(`DELETE: ${request.body.id}`);
-   const delete_index = Number(request.body.id);
-   console.log(delete_index);
-   todos.splice(delete_index,1);
-  console.log(todos);
-  response.send('DELETE todo');
-});
+// app.delete('/todo/App/api/todo', (request, response) => {
+//    console.log(`DELETE: ${request.body.id}`);
+//    const delete_index = Number(request.body.id);
+//    console.log(delete_index);
+//    todos.splice(delete_index,1);
+//   console.log(todos);
+//   response.send('DELETE todo');
+// });
 
 //Handle GET Request: todo/App/api/health
-app.get('/todo/App/api/health/:id', function(request, response) {
-  console.log(`GET HEALTH: ${request.params.id}`);
-  response.send(todos[request.params.id]);
-});
+// app.get('/todo/App/api/health/:id', function(request, response) {
+//   console.log(`GET HEALTH: ${request.params.id}`);
+//   response.send(todos[request.params.id]);
+// });
 
 app.listen(81);
