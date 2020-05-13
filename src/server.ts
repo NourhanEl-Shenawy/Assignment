@@ -184,21 +184,38 @@ response.json(todos_node);
 
 //Handle DELETE Request: todo/App/api/todo
 app.delete('/todo/App/api/todo/', (request, response) => {
-  console.log("DELTEEEEEE");
-  console.log(request);
+//  console.log(request);
    console.log(`DELETE: ${request.query.content}`);
-  //  const delete_index = Number(request.body.id);
-  //  console.log(delete_index);
-  //  //For allIds:
-  //  console.log(`Before Update: ${todos_node.allIds}`);
-  //     const index = todos_node.allIds.indexOf(request.body.id);
-  //     console.log(`Index in allIds array: ${index}`);
-  // todos_node.allIds.splice(index,1);
-  // console.log(`After Update: ${todos_node.allIds}`);
-  //
-  // //For ByIds:
-  // console.log(`Before Update: By Ids ${todos_node.byIds}`);
-  // console.log(todos_node.byIds);
+   //Search in byIds for the content:
+   let selected_id;
+   for (var i in todos_node.byIds){
+     let item_content = todos_node.byIds[i].content;
+  //   console.log(item_content);
+     if(item_content === request.query.content){
+       console.log(`DELETE FOUND:  ${item_content}`);
+       console.log(request.query.content);
+     selected_id = i;
+       console.log(`DELETE ID of Selected Item is ${selected_id}`);
+     }
+   }
+
+   //For allIds: Remove the ID from the array
+console.log(`Before Update: allIds ${todos_node.allIds}`);
+// const index = todos_node.allIds.indexOf(selected_id);
+// console.log(`INDEX is ${selected_id}`);
+todos_node.allIds.splice(selected_id -1 , 1 );
+//delete todos_node.allIds[selected_id - 1];
+console.log(`After Update: allIds ${todos_node.allIds}`);
+
+  // //For ByIds: Remove the whole object corresponds to ID:
+  console.log(`Before Update: By Ids ${todos_node.byIds}`);
+  delete todos_node.byIds[selected_id];
+  //console.log(` HELLO ${todos_node.allIds[selected_id]}`);
+  //todos_node.allIds[index]
+  // todos_node.allIds = [...todos_node.allIds.slice(0,selected_id),...todos_node.allIds.slice(selected_id + 1)]
+  // //delete todos_node.allIds[selected_id];
+    console.log(`After Update: By Ids ${todos_node.byIds}`);
+  //console.log(todos_node.byIds);
   // const selected = todos_node.byIds[request.body.id];
   // console.log(`Selected Object in ByIds array: ${selected}`);
   //response.send('DELETE todo');

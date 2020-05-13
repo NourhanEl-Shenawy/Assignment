@@ -20,7 +20,7 @@ const Todo = ({ todo, toggleTodo}) => (
   </li>
   </div>
   <div>
-  <button onClick={() => {deleteTodo(todo.content)}}>Remove {todo.content}</button>
+  <button onClick={() => {deleteTodo(todo.content);window.location.reload(true);}}>Remove {todo.content}</button>
   </div>
   </div>
 

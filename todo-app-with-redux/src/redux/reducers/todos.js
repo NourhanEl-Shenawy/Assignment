@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, GET_DATA} from "../actionTypes";
+import { ADD_TODO, TOGGLE_TODO, GET_DATA, DELETE_TODO} from "../actionTypes";
 //import axios from 'axios';
 import querystring from 'querystring';
 import { addTodo, toggleTodo, getTodo, setFilter, getData} from "../actions";
@@ -103,9 +103,9 @@ export default function(state = initialState, action) {
     case GET_DATA: {
       return action.todo;
     }
-    // case DELETE_TODO: {
-    //   return action.todo;
-    // }
+    case DELETE_TODO: {
+      return action.todo;
+    }
     case TOGGLE_TODO: {
       return action.todo;
       // const { id } = action.payload;

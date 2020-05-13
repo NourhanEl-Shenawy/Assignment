@@ -98,11 +98,38 @@ export const toggleTodo = (content) => {
 export const deleteTodo = (content) => {
   console.log("REMOVING ITEMS");
   console.log(`The Item that will be removed is ${content}`);
-  return(dispatch) => {
-    return axios.delete('http://localhost:81/todo/App/api/todo/',{params: {content: 'Lunch'}}).then(response => response.json()).then(json => dispatch(
-      {
-        type: "DELETE_TODO", todo: json})).catch(err => dispatch({
-          type: "ERROR", msg: "FAILED"}))
-  }
+  var config = {
+            headers: {
+                'User-Agent':'',
+                'Accept':'',
+                'Host':''
+            }
+        };
+        axios.delete('http://localhost:81/todo/App/api/todo', {params: {content: content}}, config).then((res) =>
+              {
+                console.log(res.data);
+                  this.props.dispatch({type: "DELETE_TODO", todo: res.data});
+              })
+              .catch( function(error) {
+                  console.log(JSON.stringify(error, null, 2));
+              });
+  // const response = axios.delete('http://localhost:81/todo/App/api/todo', {params: {content: 'Story'}})
+  // console.log(response);
+  // console.log(response.data);
+  // return(dispatch) => {
+  //   return axios.delete('http://localhost:81/todo/App/api/todo/',{params: {content: 'Lunch'}}).then(response => response.json()).then(json => dispatch(
+  //     {
+  //       type: "DELETE_TODO", todo: json})).catch(err => dispatch({
+  //         type: "ERROR", msg: "FAILED"}))
+  // }
 
 }
+
+// export const deleteTodo = (content) =>dispatch =>{
+//   console.log("DELETETODO");
+//   axios.delete('http://localhost:81/todo/App/api/todo', {params: {content: 'Story'}})
+//   dispatch ({
+//     type: 'DELETE_TODO',
+//     todo: content
+//   })
+// }
