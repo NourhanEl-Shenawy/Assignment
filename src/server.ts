@@ -201,24 +201,17 @@ app.delete('/todo/App/api/todo/', (request, response) => {
 
    //For allIds: Remove the ID from the array
 console.log(`Before Update: allIds ${todos_node.allIds}`);
-// const index = todos_node.allIds.indexOf(selected_id);
-// console.log(`INDEX is ${selected_id}`);
-todos_node.allIds.splice(selected_id -1 , 1 );
+ const index = todos_node.allIds.indexOf(Number(selected_id));
+
+ console.log(`INDEX is ${index}`);
+todos_node.allIds.splice(index , 1 );
 //delete todos_node.allIds[selected_id - 1];
 console.log(`After Update: allIds ${todos_node.allIds}`);
 
   // //For ByIds: Remove the whole object corresponds to ID:
   console.log(`Before Update: By Ids ${todos_node.byIds}`);
   delete todos_node.byIds[selected_id];
-  //console.log(` HELLO ${todos_node.allIds[selected_id]}`);
-  //todos_node.allIds[index]
-  // todos_node.allIds = [...todos_node.allIds.slice(0,selected_id),...todos_node.allIds.slice(selected_id + 1)]
-  // //delete todos_node.allIds[selected_id];
     console.log(`After Update: By Ids ${todos_node.byIds}`);
-  //console.log(todos_node.byIds);
-  // const selected = todos_node.byIds[request.body.id];
-  // console.log(`Selected Object in ByIds array: ${selected}`);
-  //response.send('DELETE todo');
   console.log(todos_node);
   response.json(todos_node);
 });
@@ -228,9 +221,9 @@ console.log(`After Update: allIds ${todos_node.allIds}`);
 // })
 
 //Handle GET Request: todo/App/api/health
-// app.get('/todo/App/api/health/:id', function(request, response) {
-//   console.log(`GET HEALTH: ${request.params.id}`);
-//   response.send(todos[request.params.id]);
-// });
+app.get('/todo/App/api/health/:id', function(request, response) {
+  console.log(`GET HEALTH: ${request.params.id}`);
+  response.send(todos[request.params.id]);
+});
 
 app.listen(81);
