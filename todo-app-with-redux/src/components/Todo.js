@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import cx from "classnames";
 import { toggleTodo } from "../redux/actions";
 import {deleteTodo} from "../redux/actions";
+import { Button } from 'carbon-components-react';
 
 const Todo = ({ todo, toggleTodo}) => (
   <div>
@@ -20,7 +21,7 @@ const Todo = ({ todo, toggleTodo}) => (
   </li>
   </div>
   <div>
-  <button onClick={() => {deleteTodo(todo.content);window.location.reload(true);}}>Remove {todo.content}</button>
+  <Button onClick={() => {deleteTodo(todo.content);window.location.reload(true);}}>Remove {todo.content}</Button>
   </div>
   </div>
 

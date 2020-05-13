@@ -49,6 +49,7 @@ function middleware(request: express.Request, response: express.Response, next) 
     };
     //Storing request in the file:
     var file_name = `${request.method}_${ID}`;
+    ID=ID+1;
     fs.writeFile(file_name,CircularJSON.stringify(request),function (err) {
   if (err) return console.log(err);
   console.log('DONE');

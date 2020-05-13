@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addTodo } from "../redux/actions";
-
+import { Button } from 'carbon-components-react';
 class AddTodo extends React.Component {
   constructor(props) {
     super(props);
@@ -27,9 +27,9 @@ class AddTodo extends React.Component {
           onChange={e => this.updateInput(e.target.value)}
           value={this.state.input}
         />
-        <button className="add-todo" onClick={this.handleAddTodo}>
+        <Button className="add-todo" onClick={this.handleAddTodo}>
           Add Todo
-        </button>
+        </Button>
       </div>
     );
   }
