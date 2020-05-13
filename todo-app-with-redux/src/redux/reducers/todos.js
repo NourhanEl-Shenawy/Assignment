@@ -1,5 +1,5 @@
-import { ADD_TODO, TOGGLE_TODO, GET_DATA } from "../actionTypes";
-import axios from 'axios';
+import { ADD_TODO, TOGGLE_TODO, GET_DATA} from "../actionTypes";
+//import axios from 'axios';
 import querystring from 'querystring';
 import { addTodo, toggleTodo, getTodo, setFilter, getData} from "../actions";
 
@@ -86,23 +86,26 @@ export default function(state = initialState, action) {
   // }
   switch (action.type) {
     case ADD_TODO: {
-      return action.todo
-      // const { id, content } = action.payload;
-      // return {
-      //   ...state,
-      //   allIds: [...state.allIds, id],
-      //   byIds: {
-      //     ...state.byIds,
-      //     [id]: {
-      //       content,
-      //       completed: false
-      //     }
-      //   }
-      // };
-    }
+     return action.todo
+// const { id, content } = action.payload;
+// return {
+// ...state,
+// allIds: [...state.allIds, id],
+// byIds: {
+// ...state.byIds,
+// [id]: {
+// content,
+// completed: false
+//  }
+//   }
+//   };
+     }
     case GET_DATA: {
       return action.todo;
     }
+    // case DELETE_TODO: {
+    //   return action.todo;
+    // }
     case TOGGLE_TODO: {
       return action.todo;
       // const { id } = action.payload;

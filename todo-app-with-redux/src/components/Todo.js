@@ -2,9 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import cx from "classnames";
 import { toggleTodo } from "../redux/actions";
+import {deleteTodo} from "../redux/actions";
 
-const Todo = ({ todo, toggleTodo }) => (
-  <li className="todo-item" onClick={() => {toggleTodo(todo.id); window.location.reload()}}>
+const Todo = ({ todo, toggleTodo}) => (
+  <div>
+  <div>
+  <li className="todo-item" onClick={() => {toggleTodo(todo.content);window.location.reload(true);}}>
     {todo && todo.completed ? "👌" : "👋"}{" "}
     <span
       className={cx(
@@ -15,6 +18,12 @@ const Todo = ({ todo, toggleTodo }) => (
       {todo.content}
     </span>
   </li>
+  </div>
+  <div>
+  <button onClick={() => {deleteTodo(todo.content)}}>Remove {todo.content}</button>
+  </div>
+  </div>
+
 );
 
 // export default Todo;
