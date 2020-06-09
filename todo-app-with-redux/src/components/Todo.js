@@ -8,7 +8,7 @@ import { Button } from 'carbon-components-react';
 const Todo = ({ todo, toggleTodo}) => (
   <div>
   <div>
-  <li className="todo-item" onClick={() => {toggleTodo(todo.content);window.location.reload(true);}}>
+  <li className="todo-item" onClick={() => {toggleTodo(todo.content)}}>
     {todo && todo.completed ? "👌" : "👋"}{" "}
     <span
       className={cx(
@@ -21,7 +21,7 @@ const Todo = ({ todo, toggleTodo}) => (
   </li>
   </div>
   <div>
-  <Button onClick={() => {deleteTodo(todo.content);window.location.reload(true);}}>Remove {todo.content}</Button>
+  <Button size='small' onClick={() => {deleteTodo(todo.content)}}>Remove {todo.content}</Button>
   </div>
   </div>
 

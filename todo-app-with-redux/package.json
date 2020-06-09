@@ -5,20 +5,19 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@carbon/colors": "^10.9.2",
-    "@carbon/elements": "^10.11.2",
     "axios": "^0.19.2",
-    "carbon-components": "^10.11.2",
-    "carbon-components-react": "^7.11.3",
+    "carbon-components": "^10.13.0",
+    "carbon-components-react": "^7.13.0",
     "carbon-icons": "^7.0.7",
     "classnames": "2.2.6",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
-    "react-redux": "^5.0.7",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
+    "react-scripts": "^3.4.1",
+    "redux": "^4.0.5",
     "redux-axios-middleware": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
@@ -28,5 +27,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

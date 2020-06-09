@@ -1,24 +1,10 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 const fs = require('fs');
+var cors = require("cors");
 const CircularJSON = require('circular-json');
 let ID=0;
 // Initialize todo list here
-var todos = [
-  {
-    id:0,
-    title:'buy the milk'
-  }, {
-    id:1,
-    title:'rent a car'
-  }, {
-    id:2,
-    title:'feed the cat'
-  }
-];
-
-
-  var tasks: ["Workout","Study"];
 const todos_node = {
   allIds: [1,2,3],
   byIds: {1:{
@@ -87,7 +73,11 @@ const app = express();
 app.use(middleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(bodyParser.json({ type: 'application/*+json' }));
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }));
+app.use(bodyParser.text({ type: 'text/html' }));
+app.use(bodyParser.text({ type: 'text/plain' }));
+app.use(cors());
 //Handle GET Request: todo/App/api/todos
 app.get('/todo/App/api/todos/', (request, response) => {
 //Retrieving the list of items:
@@ -173,9 +163,9 @@ console.log(`Selected ID is ${selected_id}`);
   if(!(complete_flag)){
     todos_node.byIds[selected_id].completed = true; //Mark the item to completed
   }
-  // else {
-  //   todos_node.byIds[request.body.id].completed = "true";
-  // }
+  else {
+    todos_node.byIds[selected_id].completed = false; //Mark the item to incomplete
+  }
   console.log(todos_node);
 response.set('Access-Control-Allow-Origin', '*');
 response.header("Access-Control-Allow-Origin", "*");
@@ -214,17 +204,14 @@ console.log(`After Update: allIds ${todos_node.allIds}`);
   delete todos_node.byIds[selected_id];
     console.log(`After Update: By Ids ${todos_node.byIds}`);
   console.log(todos_node);
+  //console.log(response);
   response.json(todos_node);
 });
-
-// app.delete('/', (request, response) => {
-//   console.log("Generic");
-// })
 
 //Handle GET Request: todo/App/api/health
 app.get('/todo/App/api/health/:id', function(request, response) {
   console.log(`GET HEALTH: ${request.params.id}`);
-  response.send(todos[request.params.id]);
+  response.send(todos_node[request.params.id]);
 });
 
 app.listen(81);

@@ -3,4 +3,5 @@ import visibilityFilter from "./visibilityFilter";
 import todos from "./todos";
 
 console.log('index.js in Reducers');
-export default combineReducers({ todos, visibilityFilter });
+const rootReducer = combineReducers({ todos, visibilityFilter });
+export default  rootReducer;

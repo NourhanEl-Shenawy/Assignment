@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, GET_DATA, DELETE_TODO} from "../actionTypes";
+import {ADD_TODO, TOGGLE_TODO, GET_DATA, DELETE_TODO} from "../actionTypes";
 //import axios from 'axios';
 import querystring from 'querystring';
 import { addTodo, toggleTodo, getTodo, setFilter, getData} from "../actions";
@@ -75,7 +75,9 @@ const initialState = {
 export default function(state = initialState, action) {
   console.log("state function ");
   console.log(state);
-  console.log(action.type);
+  console.log("todossssss");
+  console.log(`ACTION TYPE is ${action.type}`);
+  console.log(`Todo is ${action.todo}`);
   // if(action.type === 'GET_DATA'){
   // //In order to get the length of items.
   // console.log("DATA LENGTH");
@@ -86,28 +88,20 @@ export default function(state = initialState, action) {
   // }
   switch (action.type) {
     case ADD_TODO: {
-     return action.todo
-// const { id, content } = action.payload;
-// return {
-// ...state,
-// allIds: [...state.allIds, id],
-// byIds: {
-// ...state.byIds,
-// [id]: {
-// content,
-// completed: false
-//  }
-//   }
-//   };
+  console.log(`ACTION TYPE is ADD`);
+     return action.todo.data;
      }
     case GET_DATA: {
+  console.log(`ACTION TYPE is GET`);
       return action.todo;
     }
     case DELETE_TODO: {
+  console.log(`ACTION TYPE is DELETE`);
       return action.todo;
     }
     case TOGGLE_TODO: {
-      return action.todo;
+  console.log(`ACTION TYPE is TOGGLE`);
+      return action.todo.data;
       // const { id } = action.payload;
       // console.log("TOGGLE_TODO");
       // return {

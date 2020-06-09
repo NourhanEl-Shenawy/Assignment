@@ -2,14 +2,16 @@ import React, {Component} from 'react'
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import VisibilityFilters from "./components/VisibilityFilters";
-import "./styles.css";
+import "./app.scss";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from './redux/actions'
 import {getData} from './redux/actions'
 import {withRouter} from 'react-router'
 import {Route, Link} from 'react-router-dom'
-
+import {Button} from "carbon-components-react";
+import {fieldset, legend,Checkbox} from "carbon-components-react";
+import {Breadcrumb, BreadcrumbItem} from "carbon-components-react";
 class TodoApp extends Component {
   constructor(){
     console.log("CONSTRUCTOR");
@@ -24,17 +26,19 @@ class TodoApp extends Component {
 
   }
 
-render(){
-  console.log("RENDER");
-  return (
-      <div className="todo-app">
-        <h1>To-do List</h1>
-        <AddTodo />
-        <TodoList />
-        <VisibilityFilters />
-      </div>
-    );
-}
+  render(){
+
+    console.log("RENDER");
+    return (
+
+          <div className="todo-app">
+            <h1>To-do List</h1>
+    <AddTodo />
+    <TodoList />
+    <VisibilityFilters />
+        </div>
+      );
+  }
 }
 // export default function TodoApp() {
   // return (
